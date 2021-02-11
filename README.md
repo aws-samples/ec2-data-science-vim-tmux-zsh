@@ -1,17 +1,21 @@
-## My Project
+# Simple setup Data Science development with tmux, zsh, and vim
 
-TODO: Fill this README out!
+A simple guide to setting up basic Vim, Tmux, Zsh for the Deep Learning AMI
+Amazon Linux 2 and MAC OS for data scientists.
 
-Be sure to:
+After setting up the environment it should look something like this.
 
-* Change the title in this README
-* Edit your repository description on GitHub
+![images/screenshot.png](images/screenshot.png)
 
-## Security
+There are three aspects to this setup:
+- Edit/navigate and run code in the same window simultaneously using
+  [Tmux](https://github.com/tmux/tmux/wiki).
+- Develop code with [Vim](https://www.vim.org/), configured with popular
+  plugins and sensible defaults.
+- Enable directory navigation and display git branch/status with [Oh My
+  Zsh](https://ohmyz.sh/).
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+## Getting started
 
-## License
-
-This library is licensed under the MIT-0 License. See the LICENSE file.
+    ./deploy.sh
 

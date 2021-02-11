@@ -1,0 +1,58 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "This is a cloudformation template
+  for defining a data science dev environment on EC2."
+Parameters:
+  UserData:
+    Type: String
+    Default: ""
+    # For MAC, set UserData=$(base64 *.sh)
+    # For Ubuntu, set UserData=$(base64 -w0 *.sh)
+  SecurityGroups:
+    Type: CommaDelimitedList
+    Default: sg-<PUT IN YOUR VPC SECURITY GROUP>
+  ImageId:
+    Type: String
+    Default: ami-0b898040803850657 
+    # ami-0b898040803850657 is the free Amazon Linux 2 AMI
+    # for the us-east-1.
+  AvailabilityZone:
+    Type: String
+    Default: us-east-1a
+  SubnetId:
+    Type: String
+    Default: subnet-<PUT IN YOUR VPC SUBNET>
+  InstanceType:                                        
+    Type: String
+    Default: t2.micro
+  KeyName: 
+    Type: String
+    Default: <PUT IN NAME OF YOUR AWS PEM KEY> 
+Resources: 
+  MyEC2Instance: 
+    Type: "AWS::EC2::Instance"
+    Properties: 
+      ImageId: !Ref ImageId
+      KeyName: !Ref KeyName 
+      AvailabilityZone: !Ref AvailabilityZone
+      SubnetId: !Ref SubnetId
+      SecurityGroupIds: !Ref SecurityGroups
+      Tags:
+        - Key: Name
+          Value: !Ref "AWS::StackName"
+      InstanceType: !Ref InstanceType
+      # lets add an ebs device when we create the instance
+      BlockDeviceMappings:
+        - DeviceName: /dev/xvdb
+          Ebs:
+            VolumeSize: 8 
+            VolumeType: "gp2"
+            DeleteOnTermination: "true"
+      UserData: !Ref UserData
+Outputs:
+  MyEC2InstancePublicIP:
+    Value: !GetAtt MyEC2Instance.PublicIp
+  MyEC2InstancePrivateIP:
+    Value: !GetAtt MyEC2Instance.PrivateIp
+  MyEC2InstanceID:
+    Value: !Ref MyEC2Instance
