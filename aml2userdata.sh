@@ -6,7 +6,7 @@ get_dotfiles () {
 
     echo "(1/4): GETTING DOTFILES..."
     local DIR=/home/ec2-user
-    git clone -b slim https://github.com/josiahdavis/dotfiles.git $DIR/dotfiles
+    git clone https://github.com/aws-samples/ec2-data-science-vim-tmux-zsh.git $DIR/dotfiles
     ln -s $DIR/dotfiles/.tmux.conf $DIR/.tmux.conf
     ln -s $DIR/dotfiles/.vimrc $DIR/.vimrc
     chown -R ec2-user:ec2-user $DIR/dotfiles $DIR/.vimrc $DIR/.tmux.conf
@@ -41,11 +41,12 @@ setup_tmux () {
     cd tmux
     sh autogen.sh
     ./configure && make install
-    # Get a simple startup script
-    curl https://raw.githubusercontent.com/josiahdavis/aws-reference/master/start_tmux_simple.sh -o /bin/stm
-    chmod +x /bin/stm
     cd ..
-
+    # Get a simple startup script
+    mv /home/ec2-user/dotfiles/stm.sh /bin/stm 
+    chmod +x /bin/stm
+    # Install htop
+    yum -y install htop
 }
 
 setup_zsh () {
