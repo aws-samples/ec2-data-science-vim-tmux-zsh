@@ -3,11 +3,9 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: "This is a cloudformation template
   for defining a data science dev environment on EC2."
 Parameters:
-  UserData:
+  UserDataURL:
     Type: String
-    Default: ""
-    # For MAC, set UserData=$(base64 *.sh)
-    # For Ubuntu, set UserData=$(base64 -w0 *.sh)
+    Default: "https://raw.githubusercontent.com/aws-samples/ec2-data-science-vim-tmux-zsh/main/aml2userdata.sh"
   SecurityGroups:
     Type: CommaDelimitedList
     Default: sg-<PUT IN YOUR VPC SECURITY GROUP>
@@ -48,8 +46,19 @@ Resources:
             VolumeSize: 8 
             VolumeType: "gp2"
             DeleteOnTermination: "true"
-      UserData: !Ref UserData
+      UserData: 
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash -xe
+            curl -o aml2userdata.sh ${UserDataURL}
+            chmod +x aml2userdata.sh
+            ./aml2userdata.sh
+            rm aml2userdata.sh
+ 
+
 Outputs:
+  MyEC2InstanceSSH:
+    Value: !Sub "ssh -i ${KeyName} ec2-user@${MyEC2Instance.PublicIp}"
   MyEC2InstancePublicIP:
     Value: !GetAtt MyEC2Instance.PublicIp
   MyEC2InstancePrivateIP:
