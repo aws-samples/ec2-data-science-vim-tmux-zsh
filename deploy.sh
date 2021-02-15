@@ -6,7 +6,7 @@ PROFILE=${3:-default}
 
 deploy () {
 
-  local CMD="aws cloudformation --region=${REGION} profile=${PROFILE}"
+  local CMD="aws cloudformation --region=${REGION} --profile=${PROFILE}"
           
   ${CMD} deploy \
   --stack-name ${STACK_NAME} \
