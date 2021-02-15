@@ -2,7 +2,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'Chiel92/vim-autoformat'
 Plug 'tmhedberg/SimpylFold'
-Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdtree'
 Plug 'itchyny/lightline.vim'
 Plug 'zxqfl/tabnine-vim'
@@ -10,6 +9,7 @@ Plug 'tpope/vim-commentary'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'jiangmiao/auto-pairs'
 Plug 'machakann/vim-highlightedyank'
+Plug 'morhetz/gruvbox'
 
 call plug#end()
 
@@ -25,21 +25,11 @@ nnoremap <Leader>x :x<CR>
 nnoremap <Leader>q :q<CR>
 
 " set the clipboard
-set clipboard=unnamed 
+set clipboard=unnamed
 
 " Copy to the system clipboard
 vnoremap <Leader>y "+y
 
-" Color
-let g:gruvbox_contrast_dark = 'hard'
-if exists('+termguicolors')
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
-let g:gruvbox_invert_selection='0'
-syntax enable
-colorscheme gruvbox
-set background=dark
 
 " Apply formatter on save
 au BufWrite * :Autoformat
@@ -91,3 +81,15 @@ set smarttab
 set nowrap
 set colorcolumn=88
 set cursorline
+set t_Co=256
+
+" Color
+let g:gruvbox_contrast_dark = 'hard'
+if exists('+termguicolors')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+let g:gruvbox_invert_selection='0'
+syntax enable
+silent! colorscheme gruvbox
+set background=dark
