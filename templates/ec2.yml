@@ -11,18 +11,18 @@ Parameters:
     Default: sg-<PUT IN YOUR VPC SECURITY GROUP>
   ImageId:
     Type: String
-    Default: ami-0b898040803850657 
+    Default: ami-0778ed84ed6a2b0b6
     # ami-0b898040803850657 is the free Amazon Linux 2 AMI
     # for the us-east-1.
   AvailabilityZone:
     Type: String
-    Default: us-east-1a
+    Default: ap-southeast-1a 
   SubnetId:
     Type: String
     Default: subnet-<PUT IN YOUR VPC SUBNET>
   InstanceType:                                        
     Type: String
-    Default: t2.micro
+    Default: t2.large
   KeyName: 
     Type: String
     Default: <PUT IN NAME OF YOUR AWS PEM KEY> 
@@ -58,7 +58,7 @@ Resources:
 
 Outputs:
   MyEC2InstanceSSH:
-    Value: !Sub "ssh -i ${KeyName} ec2-user@${MyEC2Instance.PublicIp}"
+    Value: !Sub "ssh -i <YOUR PATH TO PEM FILE>/${KeyName}.pem ec2-user@${MyEC2Instance.PublicIp}"
   MyEC2InstancePublicIP:
     Value: !GetAtt MyEC2Instance.PublicIp
   MyEC2InstancePrivateIP:
