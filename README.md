@@ -19,3 +19,5 @@ There are three aspects to this setup:
 
     ./deploy.sh
 
+[![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=data-science-dev-env&templateURL=https://raw.githubusercontent.com/aws-samples/ec2-data-science-vim-tmux-zsh/main/templates/ec2.yml)
+
