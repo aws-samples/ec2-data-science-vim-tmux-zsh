@@ -61,8 +61,9 @@ map <C-l> <C-W>l
 :augroup END
 
 " Searching within a file
-set hlsearch
-set incsearch
+set hlsearch  " highlight search results 
+set incsearch " show search results as you type
+nnoremap <silent> <CR> :nohlsearch<Bar>:echo<CR> " Clear search results with enter
 
 " Nerdtree open/close toggle
 map <C-n> :NERDTreeToggle<CR>
