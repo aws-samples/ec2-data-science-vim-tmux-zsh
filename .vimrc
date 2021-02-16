@@ -68,21 +68,13 @@ nnoremap <silent> <CR> :nohlsearch<Bar>:echo<CR> " Clear search results with ent
 " Nerdtree open/close toggle
 map <C-n> :NERDTreeToggle<CR>
 
-" Additional vim options
-set encoding=utf-8
-set ruler
-set viminfo='20,<1000 " inc copy/paste-buffer
-set tabstop=4 softtabstop=4
+
+" Tab spacing
+set tabstop=4 
+set softtabstop=4 
 set shiftwidth=4
-set expandtab " Convert from tab char to spaces
-set noerrorbells
-set visualbell
-set t_vb=
 set smarttab
-set nowrap
-set colorcolumn=88
-set cursorline
-set t_Co=256
+set expandtab                            
 
 " Color
 let g:gruvbox_contrast_dark = 'hard'
@@ -94,3 +86,13 @@ let g:gruvbox_invert_selection='0'
 syntax enable
 silent! colorscheme gruvbox
 set background=dark
+
+" Additional vim options
+set encoding=utf-8                       " Set encoding
+set ruler                                " Show line, column number
+set viminfo='20,<1000                    " Increase the copy/paste-buffer
+set noerrorbells visualbell t_vb=        " Get rid of bell sound on error
+set nowrap                               " Turn off text wrapping
+set colorcolumn=88                       " Column number for vertical line
+set cursorline                           " Highlight the line of the cursor
+set t_Co=256
