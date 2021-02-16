@@ -11,7 +11,7 @@ deploy () {
   ${CMD} deploy \
   --stack-name ${STACK_NAME} \
   --template-file ./templates/ec2.yml \
-  --parameter-overrides $(cat config/deploy.ini) UserData=$(base64 aml2userdata.sh) \
+  --parameter-overrides $(cat config/deploy.ini) \
   --capabilities CAPABILITY_NAMED_IAM CAPABILITY_IAM CAPABILITY_AUTO_EXPAND
 }
 

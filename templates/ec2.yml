@@ -3,28 +3,26 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: "This is a cloudformation template
   for defining a data science dev environment on EC2."
 Parameters:
-  UserData:
+  UserDataURL:
     Type: String
-    Default: ""
-    # For MAC, set UserData=$(base64 *.sh)
-    # For Ubuntu, set UserData=$(base64 -w0 *.sh)
+    Default: "https://raw.githubusercontent.com/aws-samples/ec2-data-science-vim-tmux-zsh/main/aml2userdata.sh"
   SecurityGroups:
     Type: CommaDelimitedList
     Default: sg-<PUT IN YOUR VPC SECURITY GROUP>
   ImageId:
     Type: String
-    Default: ami-0b898040803850657 
+    Default: ami-0778ed84ed6a2b0b6
     # ami-0b898040803850657 is the free Amazon Linux 2 AMI
     # for the us-east-1.
   AvailabilityZone:
     Type: String
-    Default: us-east-1a
+    Default: ap-southeast-1a 
   SubnetId:
     Type: String
     Default: subnet-<PUT IN YOUR VPC SUBNET>
   InstanceType:                                        
     Type: String
-    Default: t2.micro
+    Default: t2.large
   KeyName: 
     Type: String
     Default: <PUT IN NAME OF YOUR AWS PEM KEY> 
@@ -48,8 +46,19 @@ Resources:
             VolumeSize: 8 
             VolumeType: "gp2"
             DeleteOnTermination: "true"
-      UserData: !Ref UserData
+      UserData: 
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash -xe
+            curl -o aml2userdata.sh ${UserDataURL}
+            chmod +x aml2userdata.sh
+            ./aml2userdata.sh
+            rm aml2userdata.sh
+ 
+
 Outputs:
+  MyEC2InstanceSSH:
+    Value: !Sub "ssh -i <YOUR PATH TO PEM FILE>/${KeyName}.pem ec2-user@${MyEC2Instance.PublicIp}"
   MyEC2InstancePublicIP:
     Value: !GetAtt MyEC2Instance.PublicIp
   MyEC2InstancePrivateIP:
