@@ -18,7 +18,6 @@ set shell=/bin/zsh
 " Setting the leader
 let mapleader="\<Space>"
 
-
 " Easier writing/quitting
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>x :x<CR>
@@ -30,7 +29,7 @@ set clipboard=unnamed
 " Copy to the system clipboard
 vnoremap <Leader>y "+y
 
-
+" Code formatting with black
 " Apply formatter on save
 au BufWrite * :Autoformat
 
@@ -95,4 +94,4 @@ set noerrorbells visualbell t_vb=        " Get rid of bell sound on error
 set nowrap                               " Turn off text wrapping
 set colorcolumn=88                       " Column number for vertical line
 set cursorline                           " Highlight the line of the cursor
-set t_Co=256
+set t_Co=256                             " Required for vim colorscheme show up in tmux
