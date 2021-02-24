@@ -12,9 +12,6 @@ Parameters:
   Region:
     Type: String
     Default: ap-southeast-1
-  AvailabilityZone:
-    Type: String
-    Default: ap-southeast-1a 
   SubnetId:
     Type: String
     Default: subnet-<PUT IN YOUR VPC SUBNET>
@@ -66,7 +63,6 @@ Resources:
     Properties: 
       ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", AMI]
       KeyName: !Ref KeyName 
-      AvailabilityZone: !Ref AvailabilityZone
       SubnetId: !Ref SubnetId
       SecurityGroupIds: !Ref SecurityGroups
       Tags:
