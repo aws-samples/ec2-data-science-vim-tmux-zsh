@@ -64,7 +64,6 @@ Resources:
   MyEC2Instance: 
     Type: "AWS::EC2::Instance"
     Properties: 
-      ImageId: !Ref ImageId
       ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", AMI]
       KeyName: !Ref KeyName 
       AvailabilityZone: !Ref AvailabilityZone
