@@ -9,14 +9,9 @@ Parameters:
   SecurityGroups:
     Type: CommaDelimitedList
     Default: sg-<PUT IN YOUR VPC SECURITY GROUP>
-  ImageId:
+  Region:
     Type: String
-    Default: ami-0778ed84ed6a2b0b6
-    # ami-0b898040803850657 is the free Amazon Linux 2 AMI
-    # for the us-east-1.
-  AvailabilityZone:
-    Type: String
-    Default: ap-southeast-1a 
+    Default: ap-southeast-1
   SubnetId:
     Type: String
     Default: subnet-<PUT IN YOUR VPC SUBNET>
@@ -26,13 +21,48 @@ Parameters:
   KeyName: 
     Type: String
     Default: <PUT IN NAME OF YOUR AWS PEM KEY> 
+Mappings:
+  RegionMap:
+    us-east-1:
+      AMI: ami-0f840415174c4a8e0
+    us-east-2:
+      AMI: ami-0a714e270d06489a9
+    us-west-1:
+      AMI: ami-09d540cb66f1315ee
+    us-west-2:
+      AMI: ami-0a20a878a1c1e5477
+    ap-south-1:
+      AMI: ami-094e7d6f3991224c6
+    ap-northeast-1:
+      AMI: ami-027229ac89dd9eb5d
+    ap-northeast-2:
+      AMI: ami-07d76242912d104e8
+    ap-northeast-3:
+      AMI: ami-0dde2f013096d1b2e
+    ap-southeast-1:
+      AMI: ami-0a6358c1d24b5b3a4
+    ap-southeast-2:
+      AMI: ami-00728fac07787e1c5
+    ca-central-1:
+      AMI: ami-069eac258dd27215c
+    eu-central-1:
+      AMI: ami-000d90ab744d79dbb
+    eu-west-1:
+      AMI: ami-0e032abfb10b0b80a
+    eu-west-2:
+      AMI: ami-09fb6eee0f4854e36
+    eu-west-3:
+      AMI: ami-01a63ba58ba1de1bc
+    eu-north-1:
+      AMI: ami-0fd52c77a8572ecfe
+    sa-east-1:
+      AMI: ami-093e3f53198605e7d
 Resources: 
   MyEC2Instance: 
     Type: "AWS::EC2::Instance"
     Properties: 
-      ImageId: !Ref ImageId
+      ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", AMI]
       KeyName: !Ref KeyName 
-      AvailabilityZone: !Ref AvailabilityZone
       SubnetId: !Ref SubnetId
       SecurityGroupIds: !Ref SecurityGroups
       Tags:
