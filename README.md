@@ -1,7 +1,7 @@
 # Simple setup Data Science development with tmux, zsh, and vim
 
 A simple guide to setting up basic Vim, Tmux, Zsh for the Deep Learning AMI
-Amazon Linux 2 and MAC OS for data scientists.
+Amazon Linux 2 for data scientists.
 
 After setting up the environment it should look something like this.
 
